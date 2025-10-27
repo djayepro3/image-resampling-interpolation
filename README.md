@@ -33,11 +33,12 @@ Image resampling, or interpolation, is the process of reconstructing or estimati
 
 From a mathematical viewpoint, **an image is a discrete sampling of a continuous spatial function**:
 
-\[
+```math
 I(x, y): \mathbb{Z}^2 \rightarrow \mathbb{R}^n
-\]
+```
 
-Resampling estimates the intensity \( I'(x', y') \) at new spatial locations that may not align with the original pixel grid.
+
+Resampling estimates the intensity $ I'(x', y') $ at new spatial locations that may not align with the original pixel grid.
 
 ---
 
@@ -61,30 +62,32 @@ Resampling affects *radiometric accuracy*, *geometric fidelity*, and *scientific
 
 Let’s derive resampling **from first principles**.
 
-We view a digital image as samples of a continuous signal \( f(x, y) \) at discrete integer coordinates:
+We view a digital image as samples of a continuous signal $ f(x, y) $ at discrete integer coordinates:
 
-\[
+```math
 I(i, j) = f(i, j)
-\]
+```
 
-To obtain the image at new coordinates \((x', y')\), we reconstruct the continuous function using an **interpolation kernel** \( h(x, y) \):
+To obtain the image at new coordinates $(x', y')$, we reconstruct the continuous function using an **interpolation kernel** $ h(x, y) $:
 
-\[
+```math
 f(x', y') = \sum_i \sum_j I(i, j) \, h(x' - i, y' - j)
-\]
+```
+
 
 Then, the resampled image is obtained as:
-\[
+```math
 I'(x', y') = f(x', y')
-\]
+```
 
-The **kernel \( h(x, y) \)** defines how nearby pixels influence the interpolated value — from simple nearest-pixel selection to complex, smooth polynomial blending.
+
+The **kernel $ h(x, y) $** defines how nearby pixels influence the interpolated value — from simple nearest-pixel selection to complex, smooth polynomial blending.
 
 ---
 
 ## 🔢 Interpolation Methods
 
-Each method uses a different kernel function \( h(x) \).  
+Each method uses a different kernel function $ h(x) $.  
 We’ll start from the simplest (Nearest Neighbor) and move toward the most advanced (Learnable Interpolation).
 
 ---
@@ -97,9 +100,10 @@ We’ll start from the simplest (Nearest Neighbor) and move toward the most adva
 #### **Theory**
 For each new pixel, assign the value of the nearest pixel from the input image:
 
-\[
+```math
 I'(x', y') = I(\text{round}(x'), \text{round}(y'))
-\]
+```
+
 
 #### **Intuition**
 - Conceptually simple: “pick the closest pixel.”
@@ -143,14 +147,16 @@ resampled = torch.nn.functional.interpolate(img_tensor, scale_factor=2, mode='ne
 Linear interpolation along x and y axes.
 
 **1D kernel:**
-[
+```math
 h(x) = \max(1 - |x|, 0)
-]
+```
+
 
 **2D separable form:**
-[
+```math
 I'(x', y') = \sum_i \sum_j I(i, j) , h(x' - i) , h(y' - j)
-]
+```
+
 
 This means each interpolated value is a **weighted average of the four nearest neighbors**.
 
@@ -188,21 +194,22 @@ resampled = torch.nn.functional.interpolate(
 
 #### **Mathematical Derivation**
 
-The **cubic convolution kernel** ( h(x) ) (Keys, 1981):
+The **cubic convolution kernel** $ h(x) $ (Keys, 1981):
 
-[
+```math
 h(x) =
 \begin{cases}
 (1.5)|x|^3 - 2.5|x|^2 + 1, & |x| < 1 \
 -0.5|x|^3 + 2.5|x|^2 - 4|x| + 2, & 1 \le |x| < 2 \
 0, & |x| \ge 2
 \end{cases}
-]
+```
+
 
 For 2D:
-[
+```math
 I'(x', y') = \sum_i \sum_j I(i, j) , h(x' - i) , h(y' - j)
-]
+```
 
 #### **Intuition**
 
@@ -232,14 +239,16 @@ I'(x', y') = \sum_i \sum_j I(i, j) , h(x' - i) , h(y' - j)
 
 #### **Theory**
 
-Spline interpolation uses **piecewise polynomial functions** to ensure smoothness up to the ( n^{th} ) derivative.
+Spline interpolation uses **piecewise polynomial functions** to ensure smoothness up to the $ n^{th} $ derivative.
 
 A general B-spline interpolation:
-[
-I'(x') = \sum_i I(i) , B_n(x' - i)
-]
 
-where ( B_n ) is an ( n^{th} )-order basis spline.
+```math
+I'(x') = \sum_i I(i) , B_n(x' - i)
+```
+
+
+where $ B_n $ is an $ n^{th} $-order basis spline.
 
 #### **Intuition**
 
@@ -262,9 +271,10 @@ where ( B_n ) is an ( n^{th} )-order basis spline.
 
 #### **Kernel**
 
-[
+```math
 h(x) = \text{sinc}(x) , \text{sinc}\left(\frac{x}{a}\right), \quad |x| < a
-]
+```
+
 
 #### **Explanation**
 
@@ -293,11 +303,12 @@ Approximates an *ideal sinc interpolation*, which perfectly reconstructs a band-
 
 For downsampling, compute the **area-weighted average** of input pixels that overlap with each output pixel.
 
-[
+```math
 I'(x', y') = \frac{\sum I(x, y) \cdot A(x, y)}{\sum A(x, y)}
-]
+```
 
-where ( A(x, y) ) is the overlap area.
+
+where $ A(x, y) $ is the overlap area.
 
 #### **Intuition**
 
@@ -329,9 +340,10 @@ Rearrange feature channels into higher spatial resolution — a *learned interpo
 For a scale factor ( r ),
 Input shape: `[B, C×r², H, W]` → Output shape: `[B, C, H×r, W×r]`.
 
-[
+```math
 I'*{c, h, w} = I*{c \times r^2 + (h \bmod r) \times r + (w \bmod r), \lfloor h / r \rfloor, \lfloor w / r \rfloor}
-]
+```
+
 
 #### **PyTorch Example**
 
@@ -359,9 +371,10 @@ output = ps(feature_map)
 
 Downsamples to a *fixed output size* regardless of input dimensions.
 
-[
+```math
 y_{ij} = \frac{1}{N_{ij}} \sum_{p,q \in R_{ij}} x_{pq}
-]
+```
+
 
 * **AdaptiveAvgPool** → smooth, energy-preserving
 * **AdaptiveMaxPool** → feature-selective, edge-preserving
@@ -390,10 +403,11 @@ Includes **data-driven interpolation** methods:
 | **Transformer Interpolation**  | Context-aware super-resolution in geospatial vision   |
 
 **Mathematical form:**
-[
+```math
 I'(x', y') = \sum_{i,j} w_{ij}(x', y') , I(x+i, y+j)
-]
-where weights ( w_{ij} ) are *learned functions of input content*.
+```
+
+where weights $ w_{ij} $ are *learned functions of input content*.
 
 </details>
 
