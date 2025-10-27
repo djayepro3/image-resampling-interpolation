@@ -38,7 +38,7 @@ I(x, y): \mathbb{Z}^2 \rightarrow \mathbb{R}^n
 ```
 
 
-Resampling estimates the intensity $ I'(x', y') $ at new spatial locations that may not align with the original pixel grid.
+Resampling estimates the intensity $I'(x', y')$ at new spatial locations that may not align with the original pixel grid.
 
 ---
 
@@ -62,13 +62,13 @@ Resampling affects *radiometric accuracy*, *geometric fidelity*, and *scientific
 
 Let’s derive resampling **from first principles**.
 
-We view a digital image as samples of a continuous signal $ f(x, y) $ at discrete integer coordinates:
+We view a digital image as samples of a continuous signal $f(x, y)$ at discrete integer coordinates:
 
 ```math
 I(i, j) = f(i, j)
 ```
 
-To obtain the image at new coordinates $(x', y')$, we reconstruct the continuous function using an **interpolation kernel** $ h(x, y) $:
+To obtain the image at new coordinates $(x', y')$, we reconstruct the continuous function using an **interpolation kernel** $h(x, y)$:
 
 ```math
 f(x', y') = \sum_i \sum_j I(i, j) \, h(x' - i, y' - j)
@@ -81,13 +81,13 @@ I'(x', y') = f(x', y')
 ```
 
 
-The **kernel $ h(x, y) $** defines how nearby pixels influence the interpolated value — from simple nearest-pixel selection to complex, smooth polynomial blending.
+The **kernel $h(x, y)$** defines how nearby pixels influence the interpolated value — from simple nearest-pixel selection to complex, smooth polynomial blending.
 
 ---
 
 ## 🔢 Interpolation Methods
 
-Each method uses a different kernel function $ h(x) $.  
+Each method uses a different kernel function $h(x)$.  
 We’ll start from the simplest (Nearest Neighbor) and move toward the most advanced (Learnable Interpolation).
 
 ---
@@ -194,7 +194,7 @@ resampled = torch.nn.functional.interpolate(
 
 #### **Mathematical Derivation**
 
-The **cubic convolution kernel** $ h(x) $ (Keys, 1981):
+The **cubic convolution kernel** $h(x)$ (Keys, 1981):
 
 ```math
 h(x) =
@@ -239,7 +239,7 @@ I'(x', y') = \sum_i \sum_j I(i, j) , h(x' - i) , h(y' - j)
 
 #### **Theory**
 
-Spline interpolation uses **piecewise polynomial functions** to ensure smoothness up to the $ n^{th} $ derivative.
+Spline interpolation uses **piecewise polynomial functions** to ensure smoothness up to the $n^{th}$ derivative.
 
 A general B-spline interpolation:
 
@@ -248,7 +248,7 @@ I'(x') = \sum_i I(i) , B_n(x' - i)
 ```
 
 
-where $ B_n $ is an $ n^{th} $-order basis spline.
+where $B_n$ is an $n^{th}$-order basis spline.
 
 #### **Intuition**
 
@@ -308,7 +308,7 @@ I'(x', y') = \frac{\sum I(x, y) \cdot A(x, y)}{\sum A(x, y)}
 ```
 
 
-where $ A(x, y) $ is the overlap area.
+where $A(x, y)$ is the overlap area.
 
 #### **Intuition**
 
