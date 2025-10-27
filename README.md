@@ -494,9 +494,9 @@ res_lanczos = torch.nn.functional.interpolate(img, scale_factor=2, mode='bicubic
 3. Szeliski, *Computer Vision: Algorithms and Applications*, Springer (2022)
 4. Shi et al., *Real-Time Single Image and Video Super-Resolution Using an Efficient Sub-Pixel CNN*, CVPR 2016
 5. GDAL Docs: [Resampling Overview](https://gdal.org/programs/gdalwarp.html#resampling-methods)
-6. Wikipedia: [Resampling (Image Processing)](https://en.wikipedia.org/wiki/Resampling_%28image_processing%29)
-7. PyTorch Docs: [torch.nn.functional.interpolate](https://pytorch.org/docs/stable/generated/torch.nn.functional.interpolate.html)
-
+6. Wikipedia: [Resampling (Image Scalinging)](https://en.wikipedia.org/wiki/Image_scaling)
+7. PyTorch Docs: [torch.nn.functional.interpolate](https://docs.pytorch.org/docs/stable/generated/torch.nn.functional.interpolate.html)
+   
 ---
 
 > 💡 *This guide aims to make interpolation both intuitive and rigorous — blending signal processing, satellite imaging, and deep learning theory in one place.*
