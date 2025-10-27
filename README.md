@@ -489,10 +489,10 @@ res_lanczos = torch.nn.functional.interpolate(img, scale_factor=2, mode='bicubic
 
 ## 📚 References
 
-1. Gonzalez & Woods, *Digital Image Processing*, 4th Edition (2018)
-2. R. G. Keys, *Cubic Convolution Interpolation for Digital Image Processing*, IEEE Trans. ASSP, 1981
-3. Szeliski, *Computer Vision: Algorithms and Applications*, Springer (2022)
-4. Shi et al., *Real-Time Single Image and Video Super-Resolution Using an Efficient Sub-Pixel CNN*, CVPR 2016
+1. Gonzalez & Woods, *Digital Image Processing*, 4th Edition (2018): [Book Link](https://www.cl72.org/090imagePLib/books/Gonzales,Woods-Digital.Image.Processing.4th.Edition.pdf)
+2. R. G. Keys, *Cubic Convolution Interpolation for Digital Image Processing*, IEEE Trans. ASSP, 1981: [Paper Link](https://www.ncorr.com/download/publications/keysbicubic.pdf)
+3. Szeliski, *Computer Vision: Algorithms and Applications*, Springer (2022): [Book Link](https://library.huree.edu.mn/data/202295/2024-06-03/Computer%20Vision%20-%20Algorithms%20and%20Applications%202nd%20Edition,%20Richard%20Szeliski.pdf)
+4. Shi et al., *Real-Time Single Image and Video Super-Resolution Using an Efficient Sub-Pixel CNN*, CVPR 2016: [Paper Link](https://arxiv.org/abs/1609.05158)
 5. GDAL Docs: [Resampling Overview](https://gdal.org/programs/gdalwarp.html#resampling-methods)
 6. Wikipedia: [Resampling (Image Scalinging)](https://en.wikipedia.org/wiki/Image_scaling)
 7. PyTorch Docs: [torch.nn.functional.interpolate](https://docs.pytorch.org/docs/stable/generated/torch.nn.functional.interpolate.html)
