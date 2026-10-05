@@ -71,7 +71,7 @@ I(i, j) = f(i, j)
 To obtain the image at new continuous coordinates $(x', y')$, we reconstruct the continuous function by convolving the discrete samples with a **separable interpolation kernel** $h(t)$:
 
 ```math
-f(x', y') \(= \sum_{i} \sum_{j} I(i, j) \cdot h(x' - i) \cdot\) h(y' - j)
+f(x', y') = \sum_{i} \sum_{j} I(i, j) \cdot h(x' - i) \cdot h(y' - j)
 ```
 
 Here, the summation runs over the discrete pixel coordinates $(i, j)$ within the localized support radius of the kernel. 
