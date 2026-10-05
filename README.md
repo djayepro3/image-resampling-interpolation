@@ -52,7 +52,7 @@ In **remote sensing**, resampling is a critical preprocessing step:
 | 🌐 **Reprojection** | Transforming data between coordinate systems | WGS84 → UTM |
 | 🧩 **Mosaicking** | Stitching adjacent tiles seamlessly | Large-area orthomosaics |
 | 🧠 **Super-Resolution / Fusion** | Combining multiple sources for higher detail | Pansharpening, data fusion |
-| 🧾 **Downscaling / Averaging** | Reducing resolution while preserving radiometry | Cloud-free composites |
+| 🧾 **Downscaling / Averaging** | Reducing resolution while preserving radiometry | Generating regional scale indicators from high-res inputs (e.g., 10m to 1km) or building image pyramids/overviews |
 
 Resampling affects *radiometric accuracy*, *geometric fidelity*, and *scientific interpretability*, making the choice of method crucial.
 
