@@ -34,11 +34,11 @@ Image resampling, or interpolation, is the process of reconstructing or estimati
 From a mathematical viewpoint, **an image is a discrete sampling of a continuous spatial function**:
 
 ```math
-I(x, y): \mathbb{Z}^2 \rightarrow \mathbb{R}^n
+I(x, y): \mathbb{R}^2 \rightarrow \mathbb{R}^n
 ```
 
 
-Resampling estimates the intensity $I'(x', y')$ at new spatial locations that may not align with the original pixel grid.
+Resampling reconstructs this continuous function to estimate the intensity $I'(x', y')$ at new spatial locations that may not align with the original pixel grid.
 
 ---
 
