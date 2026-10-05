@@ -68,20 +68,21 @@ We view a digital image as samples of a continuous signal $f(x, y)$ at discrete 
 I(i, j) = f(i, j)
 ```
 
-To obtain the image at new coordinates $(x', y')$, we reconstruct the continuous function using an **interpolation kernel** $h(x, y)$:
+To obtain the image at new continuous coordinates $(x', y')$, we reconstruct the continuous function by convolving the discrete samples with a **separable interpolation kernel** $h(t)$:
 
 ```math
-f(x', y') = \sum_i \sum_j I(i, j) \, h(x' - i, y' - j)
+f(x', y') \(= \sum_{i} \sum_{j} I(i, j) \cdot h(x' - i) \cdot\) h(y' - j)
 ```
 
+Here, the summation runs over the discrete pixel coordinates $(i, j)$ within the localized support radius of the kernel. 
 
-Then, the resampled image is obtained as:
+Finally, the resampled image intensity at the target location is evaluated as:
+
 ```math
 I'(x', y') = f(x', y')
 ```
 
-
-The **kernel $h(x, y)$** defines how nearby pixels influence the interpolated value — from simple nearest-pixel selection to complex, smooth polynomial blending.
+The **kernel $h(t)$** defines how nearby pixels influence the interpolated value — from simple nearest-pixel selection to complex, smooth polynomial blending.
 
 ---
 
